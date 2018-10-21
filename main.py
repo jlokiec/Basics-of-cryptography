@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
         message_checksum = int(hash.gen_sha256(message_data), 16)
 
-        rsa = RSA(1024)
+        rsa = RSA()
         alice = Alice(rsa.get_public_key())
         bob = Bob(rsa.get_private_key())
 

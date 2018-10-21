@@ -22,7 +22,7 @@ def mod_inv(b, n):
 
 
 class RSA:
-    def __init__(self, prime_length, e=65537):
+    def __init__(self, prime_length=1024, e=65537):
         start = time.time() * 1000
 
         p = prime.gen_prime(prime_length)
