@@ -1,5 +1,6 @@
 import math
 import random
+from mod_exp import mod_exp
 
 
 def extended_gcd(b, a):
@@ -24,7 +25,7 @@ class Alice:
         self.r = self._get_random_factor()
 
     def blind_message(self, message):
-        return (message * pow(self.r, self.e, self.n)) % self.n
+        return (message * mod_exp(self.r, self.e, self.n)) % self.n
 
     def unblind_signature(self, blind_signature):
         r_modular_inverse = self._get_random_factor_modular_inverse()
