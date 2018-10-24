@@ -2,7 +2,7 @@ import random
 
 
 # Miller-Rabin test to check if given number is prime
-def is_prime_miller_rabin(n, k=10):
+def is_prime_miller_rabin(n, k=8):
     if n == 2 or n == 3:
         return True
 
