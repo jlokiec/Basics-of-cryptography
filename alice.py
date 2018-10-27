@@ -1,21 +1,8 @@
 import math
 import random
+
 from mod_exp import mod_exp
-
-
-def extended_gcd(b, a):
-    x0, x1, y0, y1 = 1, 0, 0, 1
-    while a != 0:
-        q, b, a = b // a, a, b % a
-        x0, x1 = x1, x0 - q * x1
-        y0, y1 = y1, y0 - q * y1
-    return b, x0, y0
-
-
-def modular_inverse(b, n):
-    g, x, _ = extended_gcd(b, n)
-    if g == 1:
-        return x % n
+from rsa import modular_inverse
 
 
 class Alice:

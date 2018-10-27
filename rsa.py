@@ -5,7 +5,7 @@ import prime
 
 
 # extended Euclidean algorithm
-def xgcd(b, a):
+def extended_gcd(b, a):
     x0, x1, y0, y1 = 1, 0, 0, 1
     while a != 0:
         q, b, a = b // a, a, b % a
@@ -15,8 +15,8 @@ def xgcd(b, a):
 
 
 # modular multiplicative inverse algorithm
-def mod_inv(b, n):
-    g, x, _ = xgcd(b, n)
+def modular_inverse(b, n):
+    g, x, _ = extended_gcd(b, n)
     if g == 1:
         return x % n
 
@@ -40,7 +40,7 @@ class RSA:
         self.e = e
         print("e = {}".format(e))
 
-        e_inverse = mod_inv(e, r)
+        e_inverse = modular_inverse(e, r)
         print("e^-1 mod r = {}".format(e_inverse))
 
         self.d = e_inverse % r
