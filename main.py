@@ -24,9 +24,9 @@ if __name__ == "__main__":
         blinded_signature = bob.sign(blinded_message)
         unblinded_signature = alice.unblind_signature(blinded_signature)
 
-        print("Alice sends blinded message: {}".format(hex(blinded_message)))
-        print("Bob sends blinded signature: {}".format(hex(blinded_signature)))
-        print("Alice unblinds signature: {}".format(hex(unblinded_signature)))
+        print("Alice sends blinded message: {}".format(format(blinded_message, 'x')))
+        print("Bob sends blinded signature: {}".format(format(blinded_signature, 'x')))
+        print("Alice unblinds signature: {}".format(format(unblinded_signature, 'x')))
 
         valid_signature = bob.sign(message_checksum)
 
