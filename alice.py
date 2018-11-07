@@ -10,13 +10,15 @@ class Alice:
         self.e = public_key[0]
         self.n = public_key[1]
         self.r = self._get_random_factor()
+        self.unblinded_signature = -1
 
     def blind_message(self, message):
         return (message * mod_exp(self.r, self.e, self.n)) % self.n
 
     def unblind_signature(self, blind_signature):
         r_modular_inverse = self._get_random_factor_modular_inverse()
-        return (blind_signature * r_modular_inverse) % self.n
+        self.unblinded_signature = (blind_signature * r_modular_inverse) % self.n
+        return self.unblinded_signature
 
     def _get_random_factor(self):
         random_factor = random.randrange(pow(2, 32))

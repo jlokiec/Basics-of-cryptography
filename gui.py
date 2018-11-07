@@ -5,6 +5,9 @@ import hash
 from alice import Alice
 from bob import Bob
 from rsa import RSA
+from signatures import Signatures
+
+checksum = 0
 
 
 # function that blind signs given data
@@ -20,10 +23,6 @@ def sign():
 
     message_checksum = int(hash.gen_sha256(message_data), 16)
 
-    rsa = RSA()
-    alice = Alice(rsa.get_public_key())
-    bob = Bob(rsa.get_private_key())
-
     blinded_message = alice.blind_message(message_checksum)
     blinded_signature = bob.sign(blinded_message)
     unblinded_signature = alice.unblind_signature(blinded_signature)
@@ -37,13 +36,30 @@ def sign():
 
     valid_signature = bob.sign(message_checksum)
 
-    if valid_signature == unblinded_signature:
+    sig.valid_signature = valid_signature
+
+
+def verify():
+    sig.signature_from_textfield = text_signature.get("1.0", 'end-1c')
+
+    sign_txt = int(sig.signature_from_textfield, 16)
+
+    if sig.valid_signature == sign_txt:
         print("signature is valid!")
     else:
-        print("signature is invalid")
+        print("signature is invalid!")
 
 
 if __name__ == "__main__":
+    rsa = RSA()
+    alice = Alice(rsa.get_public_key())
+    bob = Bob(rsa.get_private_key())
+
+    sig = Signatures()
+
+    message_checksum = 0
+    valid_signature = 0
+
     window = tkinter.Tk()
     window.title("Ślepy podpis cyfrowy")
 
@@ -57,7 +73,9 @@ if __name__ == "__main__":
 
     # button to sign
     button = tkinter.Button(window, text="Podpisz wiadomość", command=sign)
+    buttonVerify = tkinter.Button(window, text="Sprawdź", command=verify)
     button.pack()
+    buttonVerify.pack()
 
     # blind signature label
     message_blind_signature = tkinter.Message(window, text="Podpis cyfrowy:", width=600)
